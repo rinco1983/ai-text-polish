@@ -1,25 +1,8 @@
 {
-  "buildCommand": "echo \"Build completed\"",
-  "devCommand": "cd backend && python3 -m uvicorn main:app --reload --port 8000",
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "backend/main.py",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "frontend/index.html"
-    }
-  ],
+  "outputDirectory": "public",
   "functions": {
-    "backend/main.py": {
-      "runtime": "python@3.9",
+    "api/*.py": {
+      "runtime": "@vercel/python@3.10",
       "maxDuration": 10
     }
   }
