@@ -1,0 +1,21 @@
+# 忽略系统文件
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 忽略开发文件
+.env
+.venv
+venv/
+env/
+
+# 忽略临时文件
+*.tmp
+*.log
+.gitignore
+
+# 忽略测试文件
+test_*.py
+*_test.py

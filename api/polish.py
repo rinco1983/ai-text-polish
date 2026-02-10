@@ -7,16 +7,18 @@ from openai import OpenAI
 # 创建 FastAPI 应用
 app = FastAPI()
 
-# 允许跨域（方便前端调用）
+# 允许跨域
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://ai-text-polish.vercel.app", "http://localhost:3000"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # 从环境变量中读取智谱 API Key
-ZHIPU_API_KEY = os.getenv("ZHIPU_API_KEY", "22896446ae2042368f83e093ea197965.VJcQGRGpMwvrAdpV")
+ZHIPU_API_KEY = os.getenv("ZHIPU_API_KEY")
+if not ZHIPU_API_KEY:
+    raise HTTPException(status_code=500, detail="ZHIPU_API_KEY environment variable not set")
 
 # 初始化客户端，指向智谱的 API 地址
 client = OpenAI(
@@ -72,5 +74,5 @@ def polish_text(request: TextRequest):
 
     except Exception as e:
         print(f"发生错误: {str(e)}")
-        # 抛出详细错误供前端调试
-        raise HTTPException(status_code=500, detail=str(e))
+        # 不向客户端暴露详细错误信息
+        raise HTTPException(status_code=500, detail="服务内部错误，请稍后重试")
