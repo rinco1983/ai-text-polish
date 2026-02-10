@@ -1,7 +1,6 @@
 import os
 import json
 from openai import OpenAI
-from http.server import BaseHTTPRequestHandler
 
 # 从环境变量中读取智谱 API Key
 ZHIPU_API_KEY = os.getenv("ZHIPU_API_KEY")
@@ -21,21 +20,20 @@ def handler(event, context):
     Netlify Function handler
     """
     try:
-        # 解析请求
-        if 'body' in event:
-            body = json.loads(event['body'])
-        else:
+        # 处理 OPTIONS 请求（预检请求）
+        if event.get('httpMethod') == 'OPTIONS':
             return {
-                'statusCode': 400,
+                'statusCode': 200,
                 'headers': {
-                    'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
                     'Access-Control-Allow-Headers': '*',
                     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
                 },
-                'body': json.dumps({'detail': '缺少请求体'})
+                'body': ''
             }
 
+        # 解析请求
+        body = json.loads(event.get('body', '{}'))
         user_text = body.get('text', '')
 
         # 验证文本输入
