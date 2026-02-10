@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI 文本改写</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>AI 文本改写</h2>
+
+    <textarea id="inputText" placeholder="请输入需要改写的文本..."></textarea>
+
+    <br />
+    <button onclick="polishText()">改写</button>
+
+    <div id="result" class="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    async function polishText() {
+      const text = document.getElementById("inputText").value;
+
+      if (!text.trim()) {
+        alert("请输入一些文本");
+        return;
+      }
+
+      const response = await fetch("/api/polish", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text: text })
+      });
+
+      const data = await response.json();
+
+      const resultDiv = document.getElementById("result");
+      resultDiv.style.display = "block";
+      resultDiv.innerText = data.polished;
+    }
+  </script>
+</body>
+</html>
