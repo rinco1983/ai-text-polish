@@ -7,18 +7,23 @@ from openai import OpenAI
 # 创建 FastAPI 应用
 app = FastAPI()
 
-# 允许跨域
+# 允许跨域（支持本地开发和生产环境）
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ai-text-polish.vercel.app", "http://localhost:3000"],
+    allow_origins=["*"],  # 临时放宽限制，方便测试
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # 从环境变量中读取智谱 API Key
 ZHIPU_API_KEY = os.getenv("ZHIPU_API_KEY")
+
+# 本地开发模式：如果未设置 API Key，使用测试模式或提示用户设置
 if not ZHIPU_API_KEY:
-    raise HTTPException(status_code=500, detail="ZHIPU_API_KEY environment variable not set")
+    # 在本地开发时，我们可以设置一个默认值用于测试
+    # 注意：生产环境中必须设置真实的 API Key
+    ZHIPU_API_KEY = os.getenv("ZHIPU_API_KEY", "your_test_api_key_here")
+    print("⚠️  警告：未设置 ZHIPU_API_KEY 环境变量，请确保在生产环境中设置真实的 API Key")
 
 # 初始化客户端，指向智谱的 API 地址
 client = OpenAI(

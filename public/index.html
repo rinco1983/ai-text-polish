@@ -2,86 +2,291 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>AI 文本改写</title>
+  <title>AI 小作家 - 让文字变得更好看！</title>
 
   <style>
-    /* 导入古风字体 */
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap');
-    
+    /* 导入可爱字体 */
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Ma+Shan+Zheng&display=swap');
+
     body {
-      font-family: 'Noto Serif SC', serif;
-      background: #f8f3e9;
-      background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z" fill="%23d3c7a9" fill-opacity="0.2" fill-rule="evenodd"/%3E%3C/svg%3E');
-      padding: 40px;
-      color: #5d4037;
+      font-family: 'Comic Neue', cursive, sans-serif;
+      background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 25%, #74b9ff 50%, #a29bfe 75%, #fd79a8 100%);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      padding: 30px 20px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
     }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .container {
-      max-width: 800px;
+      max-width: 700px;
       margin: auto;
-      background: rgba(255, 253, 245, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      border: 1px solid #e8d5b9;
+      border-radius: 30px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+      border: 5px solid #ffeaa7;
+      position: relative;
+      overflow: hidden;
     }
+
+    /* 装饰性云朵 */
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 100px;
+      opacity: 0.7;
+    }
+
+    .cloud::before {
+      content: '';
+      position: absolute;
+      background: white;
+      border-radius: 100px;
+    }
+
+    .cloud::after {
+      content: '';
+      position: absolute;
+      background: white;
+      border-radius: 100px;
+    }
+
+    .cloud1 {
+      width: 100px;
+      height: 40px;
+      top: 20px;
+      right: -30px;
+    }
+
+    .cloud1::before {
+      width: 50px;
+      height: 50px;
+      top: -25px;
+      left: 10px;
+    }
+
+    .cloud1::after {
+      width: 60px;
+      height: 40px;
+      top: -15px;
+      right: 10px;
+    }
+
+    .cloud2 {
+      width: 80px;
+      height: 35px;
+      bottom: 80px;
+      left: -40px;
+    }
+
+    .cloud2::before {
+      width: 40px;
+      height: 40px;
+      top: -20px;
+      left: 15px;
+    }
+
+    .cloud2::after {
+      width: 50px;
+      height: 35px;
+      top: -10px;
+      right: 15px;
+    }
+
     h2 {
       text-align: center;
-      color: #8b4513;
-      font-size: 28px;
+      color: #e84393;
+      font-size: 36px;
+      font-family: 'Ma Shan Zheng', cursive;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(232, 67, 147, 0.3);
+      position: relative;
+      z-index: 10;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #6c5ce7;
+      font-size: 18px;
       margin-bottom: 30px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      font-weight: bold;
+      position: relative;
+      z-index: 10;
     }
+
     textarea {
-      width: 100%;
-      height: 180px;
-      padding: 15px;
+      width: 90%;
+      max-width: 600px;
+      height: 200px;
+      padding: 20px;
       font-size: 16px;
-      font-family: 'Noto Serif SC', serif;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid #d3c7a9;
-      border-radius: 6px;
-      resize: vertical;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+      font-family: 'Comic Neue', cursive;
+      background: linear-gradient(45deg, #ffeaa7 0%, #fff 100%);
+      border: 3px solid #fdcb6e;
+      border-radius: 20px;
+      resize: none;
+      box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
+      transition: all 0.3s ease;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
-    button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 16px;
-      font-family: 'Noto Serif SC', serif;
+
+    textarea:focus {
+      outline: none;
+      border-color: #e84393;
+      box-shadow: 0 5px 20px rgba(232, 67, 147, 0.4);
+      transform: scale(1.02);
+    }
+
+    textarea::placeholder {
+      color: #dfe6e9;
+      font-style: italic;
+    }
+
+    .magic-button {
+      margin-top: 25px;
+      padding: 15px 40px;
+      font-size: 18px;
+      font-family: 'Ma Shan Zheng', cursive;
+      font-weight: bold;
       cursor: pointer;
-      background: #8b4513;
+      background: linear-gradient(45deg, #fd79a8 0%, #fdcb6e 100%);
       color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 50px;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 4px rgba(139, 69, 19, 0.3);
+      box-shadow: 0 8px 20px rgba(253, 121, 168, 0.4);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      overflow: hidden;
     }
-    button:hover {
-      background: #a0522d;
-      box-shadow: 0 4px 8px rgba(139, 69, 19, 0.4);
-      transform: translateY(-1px);
+
+    .magic-button::before {
+      content: '✨';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      opacity: 0;
+      transition: all 0.3s ease;
     }
+
+    .magic-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(253, 121, 168, 0.5);
+    }
+
+    .magic-button:active::before {
+      content: '🌟';
+      opacity: 1;
+    }
+
     .result {
-      margin-top: 25px;
+      margin-top: 30px;
       white-space: pre-wrap;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 6px;
-      border: 1px solid #d3c7a9;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      line-height: 1.6;
+      background: linear-gradient(45deg, #a8e6cf 0%, #dcedc1 100%);
+      padding: 25px;
+      border-radius: 20px;
+      border: 3px solid #55efc4;
+      box-shadow: 0 5px 15px rgba(85, 239, 196, 0.3);
+      line-height: 1.8;
+      font-size: 18px;
+      color: #2d3436;
+      position: relative;
+    }
+
+    .result::before {
+      content: '📝';
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 30px;
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 20px;
+      color: #6c5ce7;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .loading::after {
+      content: '...';
+      animation: dots 1.5s infinite;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
+
+    /* 星星装饰 */
+    .star {
+      position: absolute;
+      color: #ffeaa7;
+      animation: twinkle 2s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .star1 {
+      top: 50px;
+      left: 50px;
+      font-size: 30px;
+      animation-delay: 0s;
+    }
+
+    .star2 {
+      top: 100px;
+      right: 80px;
+      font-size: 25px;
+      animation-delay: 0.5s;
+    }
+
+    .star3 {
+      bottom: 70px;
+      left: 100px;
+      font-size: 35px;
+      animation-delay: 1s;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <h2>AI 文本改写</h2>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="star star1">⭐</div>
+    <div class="star star2">⭐</div>
+    <div class="star star3">⭐</div>
 
-    <textarea id="inputText" placeholder="请输入需要改写的文本..."></textarea>
+    <h2>AI 小作家</h2>
+    <p class="subtitle">✨ 让你的文字变得更好看 ✨</p>
 
-    <br />
-    <button onclick="polishText()">改写</button>
+    <textarea id="inputText" placeholder="请输入你想要改写的文字..."></textarea>
+
+    <button class="magic-button" onclick="polishText()">✨ 魔法改写 ✨</button>
+
+    <div class="loading" id="loading">正在施展魔法</div>
 
     <div id="result" class="result" style="display:none;"></div>
   </div>
@@ -89,26 +294,129 @@
   <script>
     async function polishText() {
       const text = document.getElementById("inputText").value;
+      const loading = document.getElementById("loading");
+      const resultDiv = document.getElementById("result");
 
       if (!text.trim()) {
-        alert("请输入一些文本");
+        showFriendlyMessage("请先输入一些文字哦 📝");
         return;
       }
 
-      const response = await fetch("/api/polish", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ text: text })
-      });
+      // 显示加载动画
+      loading.style.display = "block";
+      resultDiv.style.display = "none";
 
-      const data = await response.json();
+      try {
+        // 自动检测环境：本地开发用 localhost，Netlify 用函数路径
+        const isLocalhost = window.location.hostname === 'localhost' ||
+                           window.location.hostname === '127.0.0.1';
+        const isNetlify = window.location.hostname.includes('netlify.app') ||
+                         window.location.hostname.includes('netlify.io');
+        const apiUrl = isLocalhost
+          ? 'http://127.0.0.1:8002/api/polish'
+          : isNetlify
+            ? '/.netlify/functions/polish'
+            : '/api/polish';
 
-      const resultDiv = document.getElementById("result");
-      resultDiv.style.display = "block";
-      resultDiv.innerText = data.polished;
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ text: text })
+        });
+
+        if (!response.ok) {
+          throw new Error('网络响应异常');
+        }
+
+        const data = await response.json();
+
+        // 隐藏加载动画，显示结果
+        loading.style.display = "none";
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = `<strong>🎉 改写完成：</strong><br>${data.polished}`;
+
+        // 添加成功动画
+        resultDiv.style.animation = "none";
+        setTimeout(() => {
+          resultDiv.style.animation = "twinkle 0.5s ease-in-out";
+        }, 10);
+
+      } catch (error) {
+        loading.style.display = "none";
+        showFriendlyMessage("哎呀，魔法暂时失灵了，请稍后再试 🌟");
+        console.error('Error:', error);
+      }
     }
+
+    function showFriendlyMessage(message) {
+      // 创建友好的提示框
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(45deg, #fd79a8, #fdcb6e);
+        color: white;
+        padding: 20px 40px;
+        border-radius: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        animation: popIn 0.3s ease-out;
+      `;
+      messageDiv.textContent = message;
+      document.body.appendChild(messageDiv);
+
+      // 3秒后自动消失
+      setTimeout(() => {
+        messageDiv.style.animation = "popOut 0.3s ease-in forwards";
+        setTimeout(() => {
+          document.body.removeChild(messageDiv);
+        }, 300);
+      }, 3000);
+    }
+
+    // 添加弹出动画
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes popIn {
+        from {
+          transform: translate(-50%, -50%) scale(0.5);
+          opacity: 0;
+        }
+        to {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes popOut {
+        from {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        to {
+          transform: translate(-50%, -50%) scale(0.5);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // 页面加载时的欢迎动画
+    window.addEventListener('load', () => {
+      const container = document.querySelector('.container');
+      container.style.opacity = '0';
+      container.style.transform = 'translateY(30px)';
+      setTimeout(() => {
+        container.style.transition = 'all 0.8s ease-out';
+        container.style.opacity = '1';
+        container.style.transform = 'translateY(0)';
+      }, 100);
+    });
   </script>
 </body>
 </html>
