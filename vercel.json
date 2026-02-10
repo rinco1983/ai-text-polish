@@ -1,9 +1,9 @@
 {
-  "outputDirectory": "public",
   "functions": {
     "api/*.py": {
-      "runtime": "@vercel/python@3.10",
+      "runtime": "python3.10",
       "maxDuration": 10
     }
-  }
+  },
+  "buildCommand": "pip install -r requirements.txt"
 }
